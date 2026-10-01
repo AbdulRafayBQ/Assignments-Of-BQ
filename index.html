@@ -1,262 +1,155 @@
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Application Form</title>
+    <title>TechNova</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container">
-        <h1>Application Form</h1>
-        <p class="note">Fields marked with <span>*</span> are required.</p>
+```
+<header>
+    <nav class="navbar">
+        <div class="logo">TechNova</div>
 
-        <form>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
 
-            <fieldset>
-                <legend>A. General Information</legend>
+        <a href="#contact" class="nav-button">Get Started</a>
+    </nav>
+</header>
 
-                <div class="row">
-                    <div class="field">
-                        <label>Proposed Insured's Full Name <span>*</span></label>
-                        <input type="text">
-                    </div>
+<main>
 
-                    <div class="field">
-                        <label>Birth Date <span>*</span></label>
-                        <input type="date">
-                    </div>
-                </div>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <p class="small-title">WELCOME TO TECHNOVA</p>
+            <h1>Technology That Helps Your Business Grow</h1>
+            <p>
+                We create simple and modern digital solutions
+                that help businesses reach more customers.
+            </p>
 
-                <div class="radio-group">
-                    <label>Gender:</label>
-                    <input type="radio" name="gender"> Male
-                    <input type="radio" name="gender"> Female
-                </div>
+            <div class="hero-buttons">
+                <a href="#services" class="primary-button">Our Services</a>
+                <a href="#about" class="secondary-button">Learn More</a>
+            </div>
+        </div>
 
-                <label>Address <span>*</span></label>
-                <textarea></textarea>
+        <div class="hero-card">
+            <div class="circle"></div>
+            <h2>Smart Solutions</h2>
+            <p>Simple. Modern. Reliable.</p>
+        </div>
+    </section>
 
-                <div class="row">
-                    <div class="field">
-                        <label>Phone Number <span>*</span></label>
-                        <input type="tel" placeholder="+92 300 1234567">
-                    </div>
+    <section class="about" id="about">
+        <div class="about-image">
+            <div class="image-box">
+                <span>TN</span>
+            </div>
+        </div>
 
-                    <div class="field">
-                        <label>Email Address <span>*</span></label>
-                        <input type="email" placeholder="name@example.com">
-                    </div>
-                </div>
+        <div class="about-content">
+            <p class="small-title">ABOUT US</p>
+            <h2>We Build Digital Experiences</h2>
+            <p>
+                TechNova is a modern technology company focused on
+                creating useful and easy-to-use digital solutions
+                for businesses and individuals.
+            </p>
+            <p>
+                Our goal is to combine creativity and technology
+                to make digital experiences better.
+            </p>
 
-                <div class="row">
-                    <div class="field">
-                        <label>ID / CNIC Number <span>*</span></label>
-                        <input type="text" placeholder="42101-1234567-1">
-                    </div>
+            <a href="#contact" class="primary-button">Contact Us</a>
+        </div>
+    </section>
 
-                    <div class="field">
-                        <label>Social Security / Reference Number</label>
-                        <input type="text">
-                    </div>
-                </div>
+    <section class="services" id="services">
+        <div class="section-heading">
+            <p class="small-title">WHAT WE DO</p>
+            <h2>Our Services</h2>
+            <p>We provide simple solutions for modern businesses.</p>
+        </div>
 
-                <div class="row">
-                    <div class="field">
-                        <label>Marital Status <span>*</span></label>
-                        <select>
-                            <option>Select status</option>
-                            <option>Single</option>
-                            <option>Married</option>
-                            <option>Divorced</option>
-                        </select>
-                    </div>
+        <div class="service-container">
 
-                    <div class="field">
-                        <label>Occupation <span>*</span></label>
-                        <input type="text">
-                    </div>
-                </div>
-
-                <div class="radio-group">
-                    <label>Are you retired? <span>*</span></label>
-                    <input type="radio" name="retired"> Yes
-                    <input type="radio" name="retired"> No
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>B. Type of Health Coverage</legend>
-
-                <div class="coverage">
-                    <h3>Employee Coverage</h3>
-                    <div class="radio-group">
-                        <input type="radio" name="employee"> Yes
-                        <input type="radio" name="employee"> No
-                    </div>
-
-                    <label>Employee Plan Choice</label>
-                    <select>
-                        <option>Select plan</option>
-                        <option>Basic Plan</option>
-                        <option>Standard Plan</option>
-                        <option>Premium Plan</option>
-                    </select>
-                </div>
-
-                <div class="coverage">
-                    <h3>Spouse Coverage</h3>
-                    <div class="radio-group">
-                        <input type="radio" name="spouse"> Yes
-                        <input type="radio" name="spouse"> No
-                    </div>
-
-                    <label>Spouse Plan Choice</label>
-                    <select>
-                        <option>Select plan</option>
-                        <option>Basic Plan</option>
-                        <option>Standard Plan</option>
-                        <option>Premium Plan</option>
-                    </select>
-                </div>
-
-                <div class="coverage">
-                    <h3>Children Coverage</h3>
-                    <div class="radio-group">
-                        <input type="radio" name="children"> Yes
-                        <input type="radio" name="children"> No
-                    </div>
-
-                    <label>Children Plan Choice</label>
-                    <select>
-                        <option>Select plan</option>
-                        <option>Basic Plan</option>
-                        <option>Standard Plan</option>
-                        <option>Premium Plan</option>
-                    </select>
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>C. Spouse / Children Information</legend>
-
-                <div class="row">
-                    <div class="field">
-                        <label>Dependent Name</label>
-                        <input type="text">
-                    </div>
-
-                    <div class="field">
-                        <label>ID / SSN</label>
-                        <input type="text">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="field">
-                        <label>Relationship</label>
-                        <select>
-                            <option>Select relationship</option>
-                            <option>Spouse</option>
-                            <option>Child</option>
-                        </select>
-                    </div>
-
-                    <div class="field">
-                        <label>Birth Date</label>
-                        <input type="date">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="field">
-                        <label>Age</label>
-                        <input type="number">
-                    </div>
-
-                    <div class="field">
-                        <label>Gender</label>
-                        <select>
-                            <option>Select gender</option>
-                            <option>Male</option>
-                            <option>Female</option>
-                        </select>
-                    </div>
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>D. Policy Information</legend>
-
-                <div class="row">
-                    <div class="field">
-                        <label>Units</label>
-                        <input type="text">
-                    </div>
-
-                    <div class="field">
-                        <label>Annual Premium</label>
-                        <input type="text">
-                    </div>
-                </div>
-
-                <label>Payment Mode <span>*</span></label>
-                <select>
-                    <option>Select payment mode</option>
-                    <option>Monthly</option>
-                    <option>Quarterly</option>
-                    <option>Yearly</option>
-                </select>
-
-                <div class="row">
-                    <div class="field">
-                        <label>Cash With Application</label>
-                        <input type="text">
-                    </div>
-
-                    <div class="field">
-                        <label>Planned Monthly Premium</label>
-                        <input type="text">
-                    </div>
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>E. Required Document</legend>
-                <p>Please attach your supporting document before submitting the application.</p>
-                <label>Attach Document <span>*</span></label>
-                <input class="file-input" type="file">
-                <small>Accepted formats: PDF, JPG, JPEG and PNG</small>
-            </fieldset>
-
-            <fieldset>
-                <legend>F. Declaration</legend>
-
-                <div class="checkbox">
-                    <input type="checkbox">
-                    <label>I confirm that the information provided in this application is complete and accurate.</label>
-                </div>
-
-                <div class="row">
-                    <div class="field">
-                        <label>Applicant Full Name / Signature <span>*</span></label>
-                        <input type="text">
-                    </div>
-
-                    <div class="field">
-                        <label>Application Date <span>*</span></label>
-                        <input type="date">
-                    </div>
-                </div>
-            </fieldset>
-
-            <div class="buttons">
-                <button type="reset" class="clear">Clear Form</button>
-                <button type="submit">Submit Application</button>
+            <div class="service-card">
+                <div class="service-icon">01</div>
+                <h3>Web Design</h3>
+                <p>
+                    Modern and attractive websites designed
+                    for businesses and personal brands.
+                </p>
             </div>
 
-        </form>
+            <div class="service-card">
+                <div class="service-icon">02</div>
+                <h3>Software Solutions</h3>
+                <p>
+                    Useful software solutions that make
+                    business processes easier.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">03</div>
+                <h3>Digital Marketing</h3>
+                <p>
+                    Digital strategies that help businesses
+                    connect with their audience.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="contact-content">
+            <p class="small-title">GET IN TOUCH</p>
+            <h2>Let's Work Together</h2>
+            <p>
+                Have a project in mind? Contact us and let's
+                discuss how we can help your business.
+            </p>
+        </div>
+
+        <div class="contact-box">
+            <input type="text" placeholder="Your Name">
+            <input type="email" placeholder="Your Email">
+            <textarea placeholder="Your Message"></textarea>
+            <button type="submit">Send Message</button>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div>
+            <h3>TechNova</h3>
+            <p>Building better digital experiences.</p>
+        </div>
+
+        <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </div>
     </div>
+
+    <p class="copyright">© 2026 TechNova. All Rights Reserved.</p>
+</footer>
+```
 
 </body>
 </html>
