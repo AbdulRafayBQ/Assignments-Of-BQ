@@ -1,29 +1,282 @@
 
-<div class="search-box">
-  <div class="search-tabs">
-    <a href="#buy" class="tab active">Buy</a>
-    <a href="#rent" class="tab">Rent</a>
-    <a href="#projects" class="tab">Projects</a>
-  </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore houses, apartments and plots for sale and rent across Pakistan.">
+  <title>Zameen+ | Find Your Dream Property</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-  <form action="#properties">
-    <label for="city">City or Location</label>
-    <input
-      id="city"
-      type="text"
-      placeholder="e.g. DHA, Karachi"
-    >
+  <header class="navbar">
+    <a href="#home" class="logo">zameen<span>+</span></a>
 
-    <label for="type">Property Type</label>
-    <select id="type">
-      <option>Houses</option>
-      <option>Flats & Apartments</option>
-      <option>Plots</option>
-      <option>Commercial</option>
-    </select>
+    <nav class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#properties">Properties</a>
+      <a href="#cities">Popular Cities</a>
+      <a href="#about">About</a>
+    </nav>
 
-    <button type="submit" class="search-btn">
-      Search Properties
-    </button>
-  </form>
-</div>
+    <a href="#contact" class="post-btn">Post Property</a>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <span class="eyebrow">YOUR PROPERTY JOURNEY STARTS HERE</span>
+
+        <h1>Find a place<br>you can call <span>home.</span></h1>
+
+        <p>
+          Discover houses, apartments and plots for sale or rent
+          across Pakistan. Your dream property is just a step away.
+        </p>
+
+        <div class="search-box">
+          <div class="search-tabs">
+            <a href="#buy" class="tab active">Buy</a>
+            <a href="#rent" class="tab">Rent</a>
+            <a href="#projects" class="tab">Projects</a>
+          </div>
+
+          <form action="#properties" method="get">
+            <label for="city">City or Location</label>
+            <input
+              type="text"
+              id="city"
+              name="city"
+              placeholder="e.g. DHA, Karachi"
+            >
+
+            <label for="type">Property Type</label>
+            <select id="type" name="type">
+              <option value="houses">Houses</option>
+              <option value="apartments">Flats & Apartments</option>
+              <option value="plots">Plots</option>
+              <option value="commercial">Commercial Properties</option>
+            </select>
+
+            <button type="submit" class="search-btn">
+              Search Properties
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="properties">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">EXPLORE PROPERTIES</span>
+          <h2>Find Your Perfect Property</h2>
+          <p>Explore properties that match your lifestyle and budget.</p>
+        </div>
+
+        <a href="#properties" class="view-link">View All Properties →</a>
+      </div>
+
+      <div class="property-grid">
+        <article class="property-card">
+          <div class="property-image">
+            <img
+              src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=85"
+              alt="Beautiful modern family house"
+              loading="lazy"
+            >
+            <span class="property-tag">For Sale</span>
+          </div>
+
+          <div class="property-info">
+            <h3>Modern Family House</h3>
+            <p class="location">DHA Phase 6, Lahore</p>
+            <h2>PKR 2.45 Crore</h2>
+
+            <div class="property-details">
+              <span>4 Beds</span>
+              <span>4 Baths</span>
+              <span>10 Marla</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="property-card">
+          <div class="property-image">
+            <img
+              src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=85"
+              alt="Contemporary luxury house"
+              loading="lazy"
+            >
+            <span class="property-tag">For Sale</span>
+          </div>
+
+          <div class="property-info">
+            <h3>Contemporary Luxury Home</h3>
+            <p class="location">Bahria Town, Islamabad</p>
+            <h2>PKR 3.80 Crore</h2>
+
+            <div class="property-details">
+              <span>5 Beds</span>
+              <span>5 Baths</span>
+              <span>1 Kanal</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="property-card">
+          <div class="property-image">
+            <img
+              src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=800&q=85"
+              alt="Modern apartment interior"
+              loading="lazy"
+            >
+            <span class="property-tag rent-tag">For Rent</span>
+          </div>
+
+          <div class="property-info">
+            <h3>Modern City Apartment</h3>
+            <p class="location">Clifton, Karachi</p>
+            <h2>PKR 85,000 <small>/ month</small></h2>
+
+            <div class="property-details">
+              <span>2 Beds</span>
+              <span>2 Baths</span>
+              <span>1,200 sqft</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="property-card">
+          <div class="property-image">
+            <img
+              src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=800&q=85"
+              alt="Elegant residential property"
+              loading="lazy"
+            >
+            <span class="property-tag">For Sale</span>
+          </div>
+
+          <div class="property-info">
+            <h3>Elegant Family Residence</h3>
+            <p class="location">Johar Town, Lahore</p>
+            <h2>PKR 1.75 Crore</h2>
+
+            <div class="property-details">
+              <span>3 Beds</span>
+              <span>3 Baths</span>
+              <span>5 Marla</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="property-card">
+          <div class="property-image">
+            <img
+              src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=800&q=85"
+              alt="Premium modern home"
+              loading="lazy"
+            >
+            <span class="property-tag">For Sale</span>
+          </div>
+
+          <div class="property-info">
+            <h3>Premium Modern House</h3>
+            <p class="location">Bahria Town, Karachi</p>
+            <h2>PKR 2.10 Crore</h2>
+
+            <div class="property-details">
+              <span>4 Beds</span>
+              <span>4 Baths</span>
+              <span>10 Marla</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="property-card">
+          <div class="property-image">
+            <img
+              src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=800&q=85"
+              alt="Bright and spacious apartment"
+              loading="lazy"
+            >
+            <span class="property-tag rent-tag">For Rent</span>
+          </div>
+
+          <div class="property-info">
+            <h3>Spacious Family Apartment</h3>
+            <p class="location">F-11, Islamabad</p>
+            <h2>PKR 65,000 <small>/ month</small></h2>
+
+            <div class="property-details">
+              <span>2 Beds</span>
+              <span>2 Baths</span>
+              <span>1,000 sqft</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="cities-section" id="cities">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">POPULAR LOCATIONS</span>
+          <h2>Explore Cities in Pakistan</h2>
+          <p>Find your next home in Pakistan's popular cities.</p>
+        </div>
+      </div>
+
+      <div class="city-grid">
+        <a href="#properties" class="city-card">
+          <img
+            src="https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=700&q=85"
+            alt="City skyline"
+            loading="lazy"
+          >
+          <span>Karachi</span>
+        </a>
+
+        <a href="#properties" class="city-card">
+          <img
+            src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=700&q=85"
+            alt="Modern urban architecture"
+            loading="lazy"
+          >
+          <span>Lahore</span>
+        </a>
+
+        <a href="#properties" class="city-card">
+          <img
+            src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=700&q=85"
+            alt="City buildings"
+            loading="lazy"
+          >
+          <span>Islamabad</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="about-section" id="about">
+      <div>
+        <span class="eyebrow">ABOUT OUR PLATFORM</span>
+        <h2>Your Next Chapter Starts With the Right Home.</h2>
+      </div>
+
+      <p>
+        Explore houses, apartments, plots and rental properties.
+        Compare your options and discover a place that feels right
+        for you and your family.
+      </p>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <a href="#home" class="logo footer-logo">zameen<span>+</span></a>
+    <p>Find your place. Build your future.</p>
+    <p class="copyright">© 2026 HomeFinder. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
