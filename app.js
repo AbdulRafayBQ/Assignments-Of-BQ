@@ -1,305 +1,182 @@
-// Q1: Check if a number is positive, negative, or zero
+// JavaScript Advanced Assignment
+// All 10 questions are solved in this single file.
+// The results are printed in the browser console and on index.html.
 
-let num = 5;
+const outputElement = typeof document !== "undefined"
+  ? document.getElementById("output")
+  : null;
 
-if (num > 0) {
-    console.log("Positive number");
-} else if (num < 0) {
-    console.log("Negative number");
-} else {
-    console.log("Zero");
+function formatValue(value) {
+  if (typeof value === "string") return value;
+  if (value === undefined) return "undefined";
+  return JSON.stringify(value, null, 2);
 }
 
-// Q2: Check whether a number is even or odd
+function showResult(title, value) {
+  console.log(title, value);
 
-let numb = 7;
-
-if (numb % 2 == 0) {
-    console.log("Even number");
-} else {
-    console.log("Odd number");
+  if (outputElement) {
+    outputElement.textContent += `${title}\n${formatValue(value)}\n\n`;
+  }
 }
 
-// Q3: Find the larger of two numbers
+function showNote(note) {
+  console.log(note);
 
-let a = 10;
-let b = 20;
-
-if (a > b) {
-    console.log(a + " is larger");
-} else if (b > a) {
-    console.log(b + " is larger");
-} else {
-    console.log("Both numbers are equal");
+  if (outputElement) {
+    outputElement.textContent += `${note}\n\n`;
+  }
 }
 
-// Q4: Assign grade according to percentage
-
-let marks = 85;
-
-if (marks >= 80) {
-    console.log("Grade A");
-} else if (marks >= 70) {
-    console.log("Grade B");
-} else if (marks >= 60) {
-    console.log("Grade C");
-} else if (marks >= 50) {
-    console.log("Grade D");
-} else {
-    console.log("Grade F");
+// Clear the on-page output when the page is refreshed or the script is run again.
+if (outputElement) {
+  outputElement.textContent = "";
 }
 
-// Q5: Check whether a year is a leap year
+// Q1: Create a function that takes an array of numbers and returns a new array where each number is squared. Use map method.
+const numbers = [1, 2, 3, 4, 5];
 
-let year = 2024;
-
-if (year % 400 == 0 ||
-    (year % 4 == 0 && year % 100 != 0)) {
-    console.log("Leap year");
-} else {
-    console.log("Not a leap year");
+function squareNumbers(array) {
+  return array.map((number) => number ** 2);
 }
 
-// Q6: Print the day name using switch-case
+const squaredNumbers = squareNumbers(numbers);
+showResult("Q1 - Squared numbers:", squaredNumbers);
 
-let day = 3;
+// Q2: Write a function that takes an array of objects with name and age properties. Filter out only the users whose age is greater than 18.
+const users = [
+  { name: "Ali", age: 17 },
+  { name: "Sara", age: 22 },
+  { name: "Ahmed", age: 19 },
+  { name: "Zara", age: 16 }
+];
 
-switch (day) {
-    case 1:
-        console.log("Monday");
-        break;
-    case 2:
-        console.log("Tuesday");
-        break;
-    case 3:
-        console.log("Wednesday");
-        break;
-    case 4:
-        console.log("Thursday");
-        break;
-    case 5:
-        console.log("Friday");
-        break;
-    case 6:
-        console.log("Saturday");
-        break;
-    case 7:
-        console.log("Sunday");
-        break;
-    default:
-        console.log("Invalid day");
+function getAdultUsers(userArray) {
+  return userArray.filter((user) => user.age > 18);
 }
 
-// Q7: Calculator using switch-case
+const adultUsers = getAdultUsers(users);
+showResult("Q2 - Users older than 18:", adultUsers);
 
-let c = 10;
-let d = 5;
-let operator = "+";
+// Q3: Given an array of products with price, use reduce to calculate the total price of all products.
+const products = [
+  { name: "Keyboard", price: 2500 },
+  { name: "Mouse", price: 1200 },
+  { name: "Headphones", price: 3500 }
+];
 
-switch (operator) {
-    case "+":
-        console.log(c + d);
-        break;
-    case "-":
-        console.log(c - d);
-        break;
-    case "*":
-        console.log(c * d);
-        break;
-    case "/":
-        if (b != 0) {
-            console.log(c / d);
-        } else {
-            console.log("Cannot divide by zero");
-        }
-        break;
-    default:
-        console.log("Invalid operator");
+const totalPrice = products.reduce((total, product) => total + product.price, 0);
+showResult("Q3 - Total price of products:", totalPrice);
+
+// Q4: Create an array of students with marks. Sort the array in descending order based on marks.
+const students = [
+  { name: "Hamza", marks: 78 },
+  { name: "Ayesha", marks: 92 },
+  { name: "Bilal", marks: 85 },
+  { name: "Noor", marks: 67 }
+];
+
+const studentsByMarks = [...students].sort((a, b) => b.marks - a.marks);
+showResult("Q4 - Students sorted by marks (highest to lowest):", studentsByMarks);
+
+// Q5: Write a function that takes an array of strings and finds the first string with length greater than 5 using find method.
+const words = ["cat", "apple", "javascript", "school", "computer"];
+
+function findLongString(stringArray) {
+  return stringArray.find((word) => word.length > 5);
 }
 
+const firstLongString = findLongString(words);
+showResult("Q5 - First string with length greater than 5:", firstLongString);
 
-// Q8: Check whether a character is a vowel or consonant
+// Q6: Create an object named person with properties firstName, lastName and a method fullName that returns the full name using this keyword. Explain how this works in this context.
+const person = {
+  firstName: "Abdul",
+  lastName: "Rafay",
+  fullName: function () {
+    return `${this.firstName} ${this.lastName}`;
+  }
+};
 
-let ch = "a";
+showResult("Q6 - Person's full name:", person.fullName());
+showNote(
+  "Q6 Explanation: When person.fullName() is called as an object method, `this` refers to the person object. Therefore, this.firstName and this.lastName access that object's properties."
+);
 
-switch (ch.toLowerCase()) {
-    case "a":
-    case "e":
-    case "i":
-    case "o":
-    case "u":
-        console.log("Vowel");
-        break;
-    default:
-        console.log("Consonant");
+// Q7: Show the difference between a regular function and an arrow function when using this inside an object.
+// The assignment refers to a code snippet, but no original snippet was included in the question.
+// This example demonstrates the difference with a predictable output.
+function createThisExample() {
+  return {
+    name: "Object name",
+    regularFunction: function () {
+      return this.name;
+    },
+    arrowFunction: () => this.name
+  };
 }
 
-// Q9: Traffic light instructions using switch-case
+const outerContext = { name: "Outer context name" };
+const thisExample = createThisExample.call(outerContext);
 
-let color = "Red";
+showResult("Q7 - Regular function result:", thisExample.regularFunction());
+showResult("Q7 - Arrow function result:", thisExample.arrowFunction());
+showNote(
+  "Q7 Explanation: The regular function gets `this` from the object before the dot, so it returns `Object name`. The arrow function does not create its own `this`; it keeps the `this` value from createThisExample, so it returns `Outer context name`."
+);
 
-switch (color.toLowerCase()) {
-    case "red":
-        console.log("Stop");
-        break;
-    case "yellow":
-        console.log("Wait");
-        break;
-    case "green":
-        console.log("Go");
-        break;
-    default:
-        console.log("Invalid color");
+// Q8: Write a function that filters even numbers, doubles them using map, and returns their sum using reduce. Do it in a chain.
+const values = [1, 2, 3, 4, 5, 6];
+
+function sumOfDoubledEvens(array) {
+  return array
+    .filter((number) => number % 2 === 0)
+    .map((number) => number * 2)
+    .reduce((sum, number) => sum + number, 0);
 }
 
-// Q10: Menu-driven program using switch-case
+const doubledEvenSum = sumOfDoubledEvens(values);
+showResult("Q8 - Sum of doubled even numbers:", doubledEvenSum);
 
-let choice = 2;
-let balance = 1000;
-let amount = 200;
+// Q9: Create an array of employees with name, department and salary. (a) Find an employee in HR. (b) Sort employees by salary in ascending order.
+const employees = [
+  { name: "Usman", department: "IT", salary: 75000 },
+  { name: "Hira", department: "HR", salary: 55000 },
+  { name: "Danish", department: "Finance", salary: 68000 },
+  { name: "Mariam", department: "Marketing", salary: 62000 }
+];
 
-switch (choice) {
-    case 1:
-        console.log("Balance: " + balance);
-        break;
-    case 2:
-        balance = balance + amount;
-        console.log("Deposited: " + amount);
-        console.log("New balance: " + balance);
-        break;
-    case 3:
-        if (amount <= balance) {
-            balance = balance - amount;
-            console.log("Withdrawn: " + amount);
-            console.log("New balance: " + balance);
-        } else {
-            console.log("Insufficient balance");
-        }
-        break;
-    case 4:
-        console.log("Exit");
-        break;
-    default:
-        console.log("Invalid choice");
+// Q9(a): Find an employee who works in the HR department.
+const hrEmployee = employees.find((employee) => employee.department === "HR");
+showResult("Q9(a) - Employee in HR:", hrEmployee);
+
+// Q9(b): Sort employees by salary in ascending order (lowest to highest).
+const employeesBySalary = [...employees].sort((a, b) => a.salary - b.salary);
+showResult("Q9(b) - Employees sorted by salary (lowest to highest):", employeesBySalary);
+
+// Q10: Create a function that returns an array of an object's keys and values separately, then create a new object from an array of key-value pairs. Use Object.keys, Object.values, and Object.fromEntries.
+const course = {
+  title: "JavaScript",
+  duration: "8 weeks",
+  level: "Beginner"
+};
+
+function getKeysAndValues(object) {
+  return {
+    keys: Object.keys(object),
+    values: Object.values(object)
+  };
 }
 
-// Loop Practice Questions
+const courseDetails = getKeysAndValues(course);
+showResult("Q10 - Object keys:", courseDetails.keys);
+showResult("Q10 - Object values:", courseDetails.values);
 
-// Loop Q1: Print numbers from 1 to 10
+const keyValuePairs = [
+  ["name", "Abdul Rafay"],
+  ["course", "JavaScript"],
+  ["completed", true]
+];
 
-for (let i = 1; i <= 10; i++) {
-    console.log(i);
-}
-
-// Loop Q2: Find the sum of first N natural numbers
-
-let n = 5;
-let i = 1;
-let sum = 0;
-
-while (i <= n) {
-    sum = sum + i;
-    i++;
-}
-
-console.log("Sum = " + sum);
-
-// Loop Q3: Print multiplication table of a number
-
-let number = 5;
-
-for (let i = 1; i <= 10; i++) {
-    console.log(number + " x " + i + " = " + (number * i));
-}
-
-// Loop Q4: Find factorial using while loop
-
-let nu = 5;
-let factorial = 1;
-
-while (n > 1) {
-    factorial = factorial * n;
-    n--;
-}
-
-console.log("Factorial = " + factorial);
-
-// Loop Q5: Print numbers from 10 down to 1
-
-for (let i = 10; i >= 1; i--) {
-    console.log(i);
-}
-
-// Loop Q6: Print even numbers up to N using do-while
-
-// Loop Q6: Print even numbers up to N using do-while
-
-let g = 10;
-let h = 2;
-
-if (g >= 2) {
-    do {
-        console.log(h);
-        h = h + 2;
-    } while (h <= g);
-}
-
-// Loop Q7: Find the sum of digits of a number
-
-let eg = 1234;
-let plus = 0;
-
-while (eg > 0) {
-    let digit = eg % 10;
-    plus = plus + digit;
-    eg = Math.floor(eg / 10);
-}
-
-console.log("Sum of digits = " + plus);
-
-// Loop Q8: Print first 10 terms of Fibonacci series
-
-let x = 0;
-let y = 1;
-
-for (let i = 1; i <= 10; i++) {
-    console.log(x);
-
-    let next = x + y;
-    x = y;
-    y = next;
-}
-
-// Loop Q9: Keep guessing until the correct number is entered
-
-let correctNumber = 7;
-let guess;
-
-do {
-    guess = Number(prompt("Guess a number between 1 and 10"));
-
-    if (guess === correctNumber) {
-        console.log("Correct guess!");
-    } else {
-        console.log("Wrong guess, try again!");
-    }
-
-} while (guess !== correctNumber);
-
-// Q10: Check prime number
-
-let q = 7;
-let prime = true;
-
-for (let i = 2; i < q; i++) {
-    if (q % i == 0) {
-        prime = false;
-        break;
-    }
-}
-
-if (q > 1 && prime == true) {
-    console.log("Prime number");
-} else {
-    console.log("Not a prime number");
-}
+const newObject = Object.fromEntries(keyValuePairs);
+showResult("Q10 - New object created with Object.fromEntries:", newObject);
