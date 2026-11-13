@@ -1,182 +1,215 @@
-// JavaScript Advanced Assignment
-// All 10 questions are solved in this single file.
-// The results are printed in the browser console and on index.html.
 
-const outputElement = typeof document !== "undefined"
-  ? document.getElementById("output")
-  : null;
+// Q1: Create a function that takes an array of numbers and returns a new array where each number is squared using map method.
 
-function formatValue(value) {
-  if (typeof value === "string") return value;
-  if (value === undefined) return "undefined";
-  return JSON.stringify(value, null, 2);
+console.log("========== Q1: SQUARE NUMBERS ==========");
+
+function squareNumbers(numbers) {
+    return numbers.map(num => num * num);
 }
 
-function showResult(title, value) {
-  console.log(title, value);
-
-  if (outputElement) {
-    outputElement.textContent += `${title}\n${formatValue(value)}\n\n`;
-  }
-}
-
-function showNote(note) {
-  console.log(note);
-
-  if (outputElement) {
-    outputElement.textContent += `${note}\n\n`;
-  }
-}
-
-// Clear the on-page output when the page is refreshed or the script is run again.
-if (outputElement) {
-  outputElement.textContent = "";
-}
-
-// Q1: Create a function that takes an array of numbers and returns a new array where each number is squared. Use map method.
 const numbers = [1, 2, 3, 4, 5];
+console.log("Original Array:", numbers);
+console.log("Squared Array:", squareNumbers(numbers));
 
-function squareNumbers(array) {
-  return array.map((number) => number ** 2);
-}
 
-const squaredNumbers = squareNumbers(numbers);
-showResult("Q1 - Squared numbers:", squaredNumbers);
+// Q2: Filter out only the users whose age is greater than 18.
 
-// Q2: Write a function that takes an array of objects with name and age properties. Filter out only the users whose age is greater than 18.
+console.log("\n========== Q2: FILTER USERS ==========");
+
 const users = [
-  { name: "Ali", age: 17 },
-  { name: "Sara", age: 22 },
-  { name: "Ahmed", age: 19 },
-  { name: "Zara", age: 16 }
+    { name: "Ali", age: 22 },
+    { name: "Ahmed", age: 16 },
+    { name: "Sara", age: 25 },
+    { name: "Usman", age: 17 },
+    { name: "Ayesha", age: 20 }
 ];
 
-function getAdultUsers(userArray) {
-  return userArray.filter((user) => user.age > 18);
-}
+const adults = users.filter(user => user.age > 18);
 
-const adultUsers = getAdultUsers(users);
-showResult("Q2 - Users older than 18:", adultUsers);
+console.log("Users above 18:", adults);
+
 
 // Q3: Given an array of products with price, use reduce to calculate the total price of all products.
+
+console.log("\n========== Q3: TOTAL PRICE ==========");
+
 const products = [
-  { name: "Keyboard", price: 2500 },
-  { name: "Mouse", price: 1200 },
-  { name: "Headphones", price: 3500 }
+    { name: "Laptop", price: 50000 },
+    { name: "Mobile", price: 30000 },
+    { name: "Headphones", price: 5000 },
+    { name: "Keyboard", price: 2000 }
 ];
 
-const totalPrice = products.reduce((total, product) => total + product.price, 0);
-showResult("Q3 - Total price of products:", totalPrice);
+const totalPrice = products.reduce((total, product) => {
+    return total + product.price;
+}, 0);
+
+console.log("Total Price:", totalPrice);
+
 
 // Q4: Create an array of students with marks. Sort the array in descending order based on marks.
+
+console.log("\n========== Q4: SORT STUDENTS ==========");
+
 const students = [
-  { name: "Hamza", marks: 78 },
-  { name: "Ayesha", marks: 92 },
-  { name: "Bilal", marks: 85 },
-  { name: "Noor", marks: 67 }
+    { name: "Ali", marks: 75 },
+    { name: "Ahmed", marks: 90 },
+    { name: "Sara", marks: 85 },
+    { name: "Usman", marks: 60 },
+    { name: "Ayesha", marks: 95 }
 ];
 
-const studentsByMarks = [...students].sort((a, b) => b.marks - a.marks);
-showResult("Q4 - Students sorted by marks (highest to lowest):", studentsByMarks);
+const sortedStudents = [...students].sort((a, b) => b.marks - a.marks);
+
+console.log("Students sorted by marks (Highest to Lowest):");
+console.log(sortedStudents);
+
 
 // Q5: Write a function that takes an array of strings and finds the first string with length greater than 5 using find method.
-const words = ["cat", "apple", "javascript", "school", "computer"];
 
-function findLongString(stringArray) {
-  return stringArray.find((word) => word.length > 5);
+console.log("\n========== Q5: FIND STRING ==========");
+
+function findString(words) {
+    return words.find(word => word.length > 5);
 }
 
-const firstLongString = findLongString(words);
-showResult("Q5 - First string with length greater than 5:", firstLongString);
+const words = ["Apple", "Mango", "Banana", "Orange", "Grapes"];
 
-// Q6: Create an object named person with properties firstName, lastName and a method fullName that returns the full name using this keyword. Explain how this works in this context.
+console.log("First string with length greater than 5:");
+console.log(findString(words));
+
+
+// Q6: Create an object named person with firstName, lastName and a method fullName that returns the full name using this keyword.
+
+console.log("\n========== Q6: OBJECT AND THIS ==========");
+
 const person = {
-  firstName: "Abdul",
-  lastName: "Rafay",
-  fullName: function () {
-    return `${this.firstName} ${this.lastName}`;
-  }
+    firstName: "Abdul",
+    lastName: "Rafay",
+
+    fullName: function() {
+        return this.firstName + " " + this.lastName;
+    }
 };
 
-showResult("Q6 - Person's full name:", person.fullName());
-showNote(
-  "Q6 Explanation: When person.fullName() is called as an object method, `this` refers to the person object. Therefore, this.firstName and this.lastName access that object's properties."
-);
+console.log("Full Name:", person.fullName());
 
-// Q7: Show the difference between a regular function and an arrow function when using this inside an object.
-// The assignment refers to a code snippet, but no original snippet was included in the question.
-// This example demonstrates the difference with a predictable output.
-function createThisExample() {
-  return {
-    name: "Object name",
-    regularFunction: function () {
-      return this.name;
-    },
-    arrowFunction: () => this.name
-  };
+console.log("Explanation: The this keyword refers to the person object here. It accesses firstName and lastName properties of that object.");
+
+
+// Q7: Show the difference between regular function and arrow function when using this inside an object.
+
+console.log("\n========== Q7: REGULAR VS ARROW FUNCTION ==========");
+
+const outerObject = {
+    name: "Outer Object",
+
+    createMember: function() {
+
+        return {
+            name: "Inner Object",
+
+            regularFunction: function() {
+                return this.name;
+            },
+
+            arrowFunction: () => {
+                return this.name;
+            }
+        };
+    }
+};
+
+const member = outerObject.createMember();
+
+console.log("Regular Function:", member.regularFunction());
+console.log("Arrow Function:", member.arrowFunction());
+
+console.log("Explanation: A regular function gets its own this based on how it is called. An arrow function does not have its own this; it uses this from its surrounding scope.");
+
+
+// Q8: Filter even numbers, double them using map, and return the sum using reduce in a chain.
+
+console.log("\n========== Q8: METHOD CHAINING ==========");
+
+function calculateSum(numbers) {
+    return numbers
+        .filter(num => num % 2 === 0)
+        .map(num => num * 2)
+        .reduce((sum, num) => sum + num, 0);
 }
 
-const outerContext = { name: "Outer context name" };
-const thisExample = createThisExample.call(outerContext);
+const numberList = [1, 2, 3, 4, 5, 6];
 
-showResult("Q7 - Regular function result:", thisExample.regularFunction());
-showResult("Q7 - Arrow function result:", thisExample.arrowFunction());
-showNote(
-  "Q7 Explanation: The regular function gets `this` from the object before the dot, so it returns `Object name`. The arrow function does not create its own `this`; it keeps the `this` value from createThisExample, so it returns `Outer context name`."
-);
+console.log("Original Numbers:", numberList);
+console.log("Sum of doubled even numbers:", calculateSum(numberList));
 
-// Q8: Write a function that filters even numbers, doubles them using map, and returns their sum using reduce. Do it in a chain.
-const values = [1, 2, 3, 4, 5, 6];
 
-function sumOfDoubledEvens(array) {
-  return array
-    .filter((number) => number % 2 === 0)
-    .map((number) => number * 2)
-    .reduce((sum, number) => sum + number, 0);
-}
+// Q9: Create an array of employees. Find an employee in HR department and sort employees by salary in ascending order.
 
-const doubledEvenSum = sumOfDoubledEvens(values);
-showResult("Q8 - Sum of doubled even numbers:", doubledEvenSum);
+console.log("\n========== Q9: EMPLOYEES ==========");
 
-// Q9: Create an array of employees with name, department and salary. (a) Find an employee in HR. (b) Sort employees by salary in ascending order.
 const employees = [
-  { name: "Usman", department: "IT", salary: 75000 },
-  { name: "Hira", department: "HR", salary: 55000 },
-  { name: "Danish", department: "Finance", salary: 68000 },
-  { name: "Mariam", department: "Marketing", salary: 62000 }
+    { name: "Ali", department: "IT", salary: 50000 },
+    { name: "Sara", department: "HR", salary: 35000 },
+    { name: "Ahmed", department: "Finance", salary: 45000 },
+    { name: "Ayesha", department: "IT", salary: 60000 },
+    { name: "Usman", department: "HR", salary: 40000 }
 ];
 
-// Q9(a): Find an employee who works in the HR department.
-const hrEmployee = employees.find((employee) => employee.department === "HR");
-showResult("Q9(a) - Employee in HR:", hrEmployee);
+// a) Find an employee who works in HR department
 
-// Q9(b): Sort employees by salary in ascending order (lowest to highest).
-const employeesBySalary = [...employees].sort((a, b) => a.salary - b.salary);
-showResult("Q9(b) - Employees sorted by salary (lowest to highest):", employeesBySalary);
+const hrEmployee = employees.find(employee => employee.department === "HR");
 
-// Q10: Create a function that returns an array of an object's keys and values separately, then create a new object from an array of key-value pairs. Use Object.keys, Object.values, and Object.fromEntries.
-const course = {
-  title: "JavaScript",
-  duration: "8 weeks",
-  level: "Beginner"
-};
+console.log("Employee in HR Department:");
+console.log(hrEmployee);
 
-function getKeysAndValues(object) {
-  return {
-    keys: Object.keys(object),
-    values: Object.values(object)
-  };
+// b) Sort employees by salary in ascending order
+
+const sortedEmployees = [...employees].sort((a, b) => a.salary - b.salary);
+
+console.log("Employees Sorted by Salary (Lowest to Highest):");
+console.log(sortedEmployees);
+
+
+// Q10: Return an array of object keys and values separately using Object.keys and Object.values. Create a new object using Object.fromEntries.
+
+console.log("\n========== Q10: OBJECT METHODS ==========");
+
+function objectOperations(obj) {
+
+    const keys = Object.keys(obj);
+
+    const values = Object.values(obj);
+
+    return {
+        keys: keys,
+        values: values
+    };
 }
 
-const courseDetails = getKeysAndValues(course);
-showResult("Q10 - Object keys:", courseDetails.keys);
-showResult("Q10 - Object values:", courseDetails.values);
+const myObject = {
+    name: "Rafay",
+    age: 20,
+    city: "Karachi"
+};
 
-const keyValuePairs = [
-  ["name", "Abdul Rafay"],
-  ["course", "JavaScript"],
-  ["completed", true]
+const result = objectOperations(myObject);
+
+console.log("Object Keys:", result.keys);
+console.log("Object Values:", result.values);
+
+// Create a new object from an array of key-value pairs
+
+const entries = [
+    ["name", "Ahmed"],
+    ["age", 22],
+    ["city", "Lahore"]
 ];
 
-const newObject = Object.fromEntries(keyValuePairs);
-showResult("Q10 - New object created with Object.fromEntries:", newObject);
+const newObject = Object.fromEntries(entries);
+
+console.log("New Object:", newObject);
+
+
+console.log("\n========== ALL 10 QUESTIONS COMPLETED ==========");
