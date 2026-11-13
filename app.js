@@ -1,215 +1,459 @@
 
-// Q1: Create a function that takes an array of numbers and returns a new array where each number is squared using map method.
+// To-Do List Application
+// JavaScript with Local Storage and Date
 
-console.log("========== Q1: SQUARE NUMBERS ==========");
+// HTML Elements
+const taskForm = document.getElementById("taskForm");
+const taskInput = document.getElementById("taskInput");
+const taskDate = document.getElementById("taskDate");
+const taskList = document.getElementById("taskList");
 
-function squareNumbers(numbers) {
-    return numbers.map(num => num * num);
+const totalCount = document.getElementById("totalCount");
+const completedCount = document.getElementById("completedCount");
+const pendingCount = document.getElementById("pendingCount");
+const taskCountLabel = document.getElementById("taskCountLabel");
+
+const filterButtons = document.querySelectorAll(".filter-btn");
+
+const editDialog = document.getElementById("editDialog");
+const editForm = document.getElementById("editForm");
+const editInput = document.getElementById("editInput");
+const editDate = document.getElementById("editDate");
+const cancelEdit = document.getElementById("cancelEdit");
+
+const toast = document.getElementById("toast");
+
+// Variables
+const STORAGE_KEY = "daylist_tasks";
+
+let tasks = loadTasks();
+let currentFilter = "all";
+let editingTaskId = null;
+
+
+// Get Today's Date
+function getToday() {
+    const today = new Date();
+
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
 }
 
-const numbers = [1, 2, 3, 4, 5];
-console.log("Original Array:", numbers);
-console.log("Squared Array:", squareNumbers(numbers));
 
+// Display Current Date
+function displayDate() {
+    const today = new Date();
 
-// Q2: Filter out only the users whose age is greater than 18.
+    const fullDate = today.toLocaleDateString("en-US", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+    });
 
-console.log("\n========== Q2: FILTER USERS ==========");
+    document.getElementById("currentDate").textContent = fullDate;
 
-const users = [
-    { name: "Ali", age: 22 },
-    { name: "Ahmed", age: 16 },
-    { name: "Sara", age: 25 },
-    { name: "Usman", age: 17 },
-    { name: "Ayesha", age: 20 }
-];
-
-const adults = users.filter(user => user.age > 18);
-
-console.log("Users above 18:", adults);
-
-
-// Q3: Given an array of products with price, use reduce to calculate the total price of all products.
-
-console.log("\n========== Q3: TOTAL PRICE ==========");
-
-const products = [
-    { name: "Laptop", price: 50000 },
-    { name: "Mobile", price: 30000 },
-    { name: "Headphones", price: 5000 },
-    { name: "Keyboard", price: 2000 }
-];
-
-const totalPrice = products.reduce((total, product) => {
-    return total + product.price;
-}, 0);
-
-console.log("Total Price:", totalPrice);
-
-
-// Q4: Create an array of students with marks. Sort the array in descending order based on marks.
-
-console.log("\n========== Q4: SORT STUDENTS ==========");
-
-const students = [
-    { name: "Ali", marks: 75 },
-    { name: "Ahmed", marks: 90 },
-    { name: "Sara", marks: 85 },
-    { name: "Usman", marks: 60 },
-    { name: "Ayesha", marks: 95 }
-];
-
-const sortedStudents = [...students].sort((a, b) => b.marks - a.marks);
-
-console.log("Students sorted by marks (Highest to Lowest):");
-console.log(sortedStudents);
-
-
-// Q5: Write a function that takes an array of strings and finds the first string with length greater than 5 using find method.
-
-console.log("\n========== Q5: FIND STRING ==========");
-
-function findString(words) {
-    return words.find(word => word.length > 5);
+    document.getElementById("heroDate").textContent =
+        today.toLocaleDateString("en-US", {
+            day: "numeric",
+            month: "long"
+        });
 }
 
-const words = ["Apple", "Mango", "Banana", "Orange", "Grapes"];
-
-console.log("First string with length greater than 5:");
-console.log(findString(words));
+displayDate();
 
 
-// Q6: Create an object named person with firstName, lastName and a method fullName that returns the full name using this keyword.
+// Format Date
+function formatDate(dateString) {
+    if (!dateString) return "";
 
-console.log("\n========== Q6: OBJECT AND THIS ==========");
+    const [year, month, day] = dateString.split("-").map(Number);
 
-const person = {
-    firstName: "Abdul",
-    lastName: "Rafay",
+    return new Date(year, month - 1, day).toLocaleDateString("en-US", {
+        day: "numeric",
+        month: "short",
+        year: "numeric"
+    });
+}
 
-    fullName: function() {
-        return this.firstName + " " + this.lastName;
+
+// Generate Unique ID
+function createId() {
+    return Date.now().toString() + Math.random().toString(36).slice(2);
+}
+
+
+// Load Tasks
+function loadTasks() {
+    try {
+        const savedTasks = localStorage.getItem(STORAGE_KEY);
+
+        if (!savedTasks) return [];
+
+        const parsedTasks = JSON.parse(savedTasks);
+
+        if (!Array.isArray(parsedTasks)) return [];
+
+        return parsedTasks
+            .filter(task => task && typeof task.text === "string")
+            .map(task => ({
+                id: String(task.id || createId()),
+                text: task.text,
+                completed: Boolean(task.completed),
+                dueDate: task.dueDate || "",
+                createdAt: Number(task.createdAt) || Date.now()
+            }));
+
+    } catch (error) {
+        console.error("Loading Error:", error);
+        return [];
     }
-};
-
-console.log("Full Name:", person.fullName());
-
-console.log("Explanation: The this keyword refers to the person object here. It accesses firstName and lastName properties of that object.");
+}
 
 
-// Q7: Show the difference between regular function and arrow function when using this inside an object.
+// Save Tasks
+function saveTasks() {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+        return true;
+    } catch (error) {
+        console.error("Storage Error:", error);
+        showToast("Could not save tasks.");
+        return false;
+    }
+}
 
-console.log("\n========== Q7: REGULAR VS ARROW FUNCTION ==========");
 
-const outerObject = {
-    name: "Outer Object",
+// Show Notification
+let toastTimer;
 
-    createMember: function() {
+function showToast(message) {
+    toast.textContent = message;
+    toast.classList.add("show");
 
-        return {
-            name: "Inner Object",
+    clearTimeout(toastTimer);
 
-            regularFunction: function() {
-                return this.name;
-            },
+    toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2500);
+}
 
-            arrowFunction: () => {
-                return this.name;
+
+// Update Counts
+function updateCounts() {
+    const total = tasks.length;
+
+    const completed = tasks.filter(task => task.completed).length;
+
+    const pending = total - completed;
+
+    totalCount.textContent = total;
+    completedCount.textContent = completed;
+    pendingCount.textContent = pending;
+
+    taskCountLabel.textContent =
+        total + (total === 1 ? " task" : " tasks");
+}
+
+
+// Update Filters
+function updateFilters() {
+    filterButtons.forEach(button => {
+        button.classList.toggle(
+            "active",
+            button.dataset.filter === currentFilter
+        );
+    });
+}
+
+
+// Render Tasks
+function renderTasks() {
+    updateCounts();
+
+    taskList.innerHTML = "";
+
+    const filteredTasks = tasks.filter(task => {
+        if (currentFilter === "completed") return task.completed;
+
+        if (currentFilter === "pending") return !task.completed;
+
+        return true;
+    });
+
+
+    // Empty State
+    if (filteredTasks.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "empty-state";
+
+        const heading = document.createElement("h3");
+        heading.textContent = currentFilter === "completed"
+            ? "No completed tasks yet"
+            : currentFilter === "pending"
+                ? "All caught up!"
+                : "No tasks yet";
+
+        const description = document.createElement("p");
+        description.textContent = "Add a task to get started.";
+
+        empty.append(heading, description);
+        taskList.appendChild(empty);
+
+        return;
+    }
+
+
+    // Display Each Task
+    filteredTasks.forEach(task => {
+        const item = document.createElement("div");
+
+        item.className = "task-item";
+
+        if (task.completed) {
+            item.classList.add("completed");
+        }
+
+        item.dataset.taskId = task.id;
+
+
+        // Checkbox
+        const checkbox = document.createElement("input");
+
+        checkbox.type = "checkbox";
+        checkbox.className = "task-checkbox";
+        checkbox.checked = task.completed;
+        checkbox.dataset.action = "toggle";
+
+
+        // Task Details
+        const details = document.createElement("div");
+
+        const title = document.createElement("p");
+
+        title.className = "task-title";
+        title.textContent = task.text;
+
+        const meta = document.createElement("p");
+
+        meta.className = "task-meta";
+
+        if (task.dueDate) {
+            meta.textContent = "Due: " + formatDate(task.dueDate);
+
+            if (!task.completed && task.dueDate < getToday()) {
+                meta.classList.add("overdue");
+                meta.textContent += " - Overdue";
+            } else if (task.dueDate === getToday()) {
+                meta.classList.add("today");
             }
-        };
+        } else {
+            meta.textContent =
+                "Added: " + new Date(task.createdAt).toLocaleDateString();
+        }
+
+        details.append(title, meta);
+
+
+        // Edit Button
+        const editButton = document.createElement("button");
+
+        editButton.className = "action-btn edit-btn";
+        editButton.textContent = "Edit";
+        editButton.dataset.action = "edit";
+
+
+        // Delete Button
+        const deleteButton = document.createElement("button");
+
+        deleteButton.className = "action-btn delete-btn";
+        deleteButton.textContent = "Delete";
+        deleteButton.dataset.action = "delete";
+
+
+        // Actions
+        const actions = document.createElement("div");
+
+        actions.className = "task-actions";
+
+        actions.append(editButton, deleteButton);
+
+
+        // Add Elements
+        item.append(checkbox, details, actions);
+
+        taskList.appendChild(item);
+    });
+}
+
+
+// ADD TASK
+taskForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const text = taskInput.value.trim();
+    const date = taskDate.value;
+
+    if (!text) {
+        showToast("Please enter a task.");
+        taskInput.focus();
+        return;
     }
-};
 
-const member = outerObject.createMember();
-
-console.log("Regular Function:", member.regularFunction());
-console.log("Arrow Function:", member.arrowFunction());
-
-console.log("Explanation: A regular function gets its own this based on how it is called. An arrow function does not have its own this; it uses this from its surrounding scope.");
-
-
-// Q8: Filter even numbers, double them using map, and return the sum using reduce in a chain.
-
-console.log("\n========== Q8: METHOD CHAINING ==========");
-
-function calculateSum(numbers) {
-    return numbers
-        .filter(num => num % 2 === 0)
-        .map(num => num * 2)
-        .reduce((sum, num) => sum + num, 0);
-}
-
-const numberList = [1, 2, 3, 4, 5, 6];
-
-console.log("Original Numbers:", numberList);
-console.log("Sum of doubled even numbers:", calculateSum(numberList));
-
-
-// Q9: Create an array of employees. Find an employee in HR department and sort employees by salary in ascending order.
-
-console.log("\n========== Q9: EMPLOYEES ==========");
-
-const employees = [
-    { name: "Ali", department: "IT", salary: 50000 },
-    { name: "Sara", department: "HR", salary: 35000 },
-    { name: "Ahmed", department: "Finance", salary: 45000 },
-    { name: "Ayesha", department: "IT", salary: 60000 },
-    { name: "Usman", department: "HR", salary: 40000 }
-];
-
-// a) Find an employee who works in HR department
-
-const hrEmployee = employees.find(employee => employee.department === "HR");
-
-console.log("Employee in HR Department:");
-console.log(hrEmployee);
-
-// b) Sort employees by salary in ascending order
-
-const sortedEmployees = [...employees].sort((a, b) => a.salary - b.salary);
-
-console.log("Employees Sorted by Salary (Lowest to Highest):");
-console.log(sortedEmployees);
-
-
-// Q10: Return an array of object keys and values separately using Object.keys and Object.values. Create a new object using Object.fromEntries.
-
-console.log("\n========== Q10: OBJECT METHODS ==========");
-
-function objectOperations(obj) {
-
-    const keys = Object.keys(obj);
-
-    const values = Object.values(obj);
-
-    return {
-        keys: keys,
-        values: values
+    const newTask = {
+        id: createId(),
+        text: text,
+        completed: false,
+        dueDate: date,
+        createdAt: Date.now()
     };
-}
 
-const myObject = {
-    name: "Rafay",
-    age: 20,
-    city: "Karachi"
-};
+    tasks.unshift(newTask);
 
-const result = objectOperations(myObject);
+    saveTasks();
 
-console.log("Object Keys:", result.keys);
-console.log("Object Values:", result.values);
+    taskForm.reset();
 
-// Create a new object from an array of key-value pairs
+    currentFilter = "all";
 
-const entries = [
-    ["name", "Ahmed"],
-    ["age", 22],
-    ["city", "Lahore"]
-];
+    updateFilters();
+    renderTasks();
 
-const newObject = Object.fromEntries(entries);
+    showToast("Task added successfully!");
 
-console.log("New Object:", newObject);
+    taskInput.focus();
+});
 
 
-console.log("\n========== ALL 10 QUESTIONS COMPLETED ==========");
+// FILTER TASKS
+filterButtons.forEach(button => {
+    button.addEventListener("click", function() {
+        currentFilter = this.dataset.filter;
+
+        updateFilters();
+        renderTasks();
+    });
+});
+
+
+// COMPLETE TASK
+taskList.addEventListener("change", function(event) {
+    if (event.target.dataset.action !== "toggle") return;
+
+    const item = event.target.closest(".task-item");
+    if (!item) return;
+
+    const taskId = item.dataset.taskId;
+
+    tasks = tasks.map(task => {
+        if (task.id === taskId) {
+            return {
+                ...task,
+                completed: event.target.checked
+            };
+        }
+
+        return task;
+    });
+
+    saveTasks();
+    renderTasks();
+
+    showToast("Task status updated!");
+});
+
+
+// EDIT AND DELETE TASKS
+taskList.addEventListener("click", function(event) {
+    const button = event.target.closest("button[data-action]");
+
+    if (!button) return;
+
+    const item = button.closest(".task-item");
+    if (!item) return;
+
+    const taskId = item.dataset.taskId;
+
+    // EDIT
+    if (button.dataset.action === "edit") {
+        const task = tasks.find(task => task.id === taskId);
+
+        if (!task) return;
+
+        editingTaskId = taskId;
+
+        editInput.value = task.text;
+        editDate.value = task.dueDate || "";
+
+        editDialog.showModal();
+
+        editInput.focus();
+    }
+
+
+    // DELETE
+    if (button.dataset.action === "delete") {
+        tasks = tasks.filter(task => task.id !== taskId);
+
+        saveTasks();
+        renderTasks();
+
+        showToast("Task deleted successfully!");
+    }
+});
+
+
+// SAVE EDITED TASK
+editForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const updatedText = editInput.value.trim();
+
+    if (!updatedText || !editingTaskId) {
+        showToast("Please enter a valid task.");
+        return;
+    }
+
+    tasks = tasks.map(task => {
+        if (task.id === editingTaskId) {
+            return {
+                ...task,
+                text: updatedText,
+                dueDate: editDate.value
+            };
+        }
+
+        return task;
+    });
+
+    saveTasks();
+
+    editDialog.close();
+
+    editingTaskId = null;
+
+    renderTasks();
+
+    showToast("Task updated successfully!");
+});
+
+
+// CANCEL EDIT
+cancelEdit.addEventListener("click", function() {
+    editDialog.close();
+    editingTaskId = null;
+});
+
+editDialog.addEventListener("close", function() {
+    editingTaskId = null;
+});
+
+
+// INITIAL LOAD
+updateFilters();
+renderTasks();
+
+console.log("Daylist Application Loaded Successfully!");

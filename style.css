@@ -1,0 +1,552 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6fb;
+    color: #202942;
+    min-height: 100vh;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.app-container {
+    width: min(100% - 40px, 1000px);
+    margin: auto;
+}
+
+/* Header */
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 0;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand h2 {
+    font-size: 24px;
+    letter-spacing: -1px;
+}
+
+.brand-icon {
+    background: #4c67dc;
+    color: white;
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    display: grid;
+    place-items: center;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.header-date {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+    color: #68728a;
+    font-size: 13px;
+}
+
+.date-label,
+.card-label {
+    color: #8da8ff;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+/* Hero Section */
+
+.hero {
+    background: linear-gradient(120deg, #202b48, #354c83);
+    color: white;
+    padding: 48px;
+    border-radius: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.eyebrow {
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #8da8ff;
+    margin-bottom: 13px;
+}
+
+.hero h1 {
+    font-size: clamp(30px, 5vw, 43px);
+    line-height: 1.2;
+}
+
+.hero h1 span {
+    display: block;
+    color: #a9bdff;
+}
+
+.hero-description {
+    color: #c1c9da;
+    line-height: 1.7;
+    margin-top: 15px;
+    max-width: 430px;
+    font-size: 14px;
+}
+
+.hero-card {
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    padding: 27px;
+    border-radius: 18px;
+    min-width: 210px;
+}
+
+.hero-card h2 {
+    font-size: 23px;
+    margin: 15px 0;
+}
+
+.hero-card p:last-child {
+    font-size: 12px;
+    color: #c1c9da;
+}
+
+/* Tasks Section */
+
+.tasks-section {
+    background: white;
+    padding: 32px;
+    border-radius: 20px;
+    box-shadow: 0 5px 25px rgba(30, 45, 80, 0.05);
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.section-heading h2 {
+    font-size: 25px;
+}
+
+#taskCountLabel {
+    color: #737d94;
+    font-size: 13px;
+}
+
+/* Add Task Form */
+
+.task-form {
+    display: grid;
+    grid-template-columns: 1fr 170px auto;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.task-form input,
+.edit-dialog input {
+    width: 100%;
+    min-width: 0;
+    border: 1px solid #e0e4ef;
+    border-radius: 11px;
+    padding: 14px;
+    outline: none;
+    background: #fafbfe;
+    color: #303a51;
+    transition: 0.2s;
+}
+
+.task-form input:focus,
+.edit-dialog input:focus {
+    border-color: #4c67dc;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(76, 103, 220, 0.10);
+}
+
+.add-btn,
+.save-btn {
+    background: #4c67dc;
+    color: white;
+    border: none;
+    border-radius: 11px;
+    padding: 0 22px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.add-btn:hover,
+.save-btn:hover {
+    background: #354fc1;
+}
+
+/* Filters */
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: #f3f5fa;
+    border: none;
+    color: #737d94;
+    padding: 10px 17px;
+    border-radius: 9px;
+    font-size: 13px;
+    transition: 0.2s;
+}
+
+.filter-btn.active {
+    background: #4c67dc;
+    color: white;
+}
+
+.filter-btn:hover:not(.active) {
+    background: #e8ecf7;
+}
+
+/* Statistics */
+
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 13px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: #f6f7fc;
+    padding: 17px;
+    border-radius: 12px;
+}
+
+.stat-card span {
+    color: #79839a;
+    font-size: 12px;
+}
+
+.stat-card h3 {
+    font-size: 25px;
+    margin-top: 7px;
+}
+
+.stat-card:nth-child(2) h3 {
+    color: #2caa78;
+}
+
+.stat-card:nth-child(3) h3 {
+    color: #df9a39;
+}
+
+/* Task Items */
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.task-item {
+    display: grid;
+    grid-template-columns: 25px 1fr auto;
+    align-items: center;
+    gap: 13px;
+    padding: 17px;
+    border: 1px solid #e9ecf3;
+    border-radius: 12px;
+    transition: 0.2s;
+}
+
+.task-item:hover {
+    border-color: #cbd4f5;
+    transform: translateY(-2px);
+}
+
+.task-checkbox {
+    width: 19px;
+    height: 19px;
+    accent-color: #4c67dc;
+    cursor: pointer;
+}
+
+.task-title {
+    font-size: 14px;
+    color: #303a51;
+    overflow-wrap: anywhere;
+}
+
+.task-item.completed .task-title {
+    text-decoration: line-through;
+    color: #a3aabe;
+}
+
+.task-item.completed {
+    background: #fafbfc;
+}
+
+.task-meta {
+    font-size: 11px;
+    color: #858fa5;
+    margin-top: 7px;
+}
+
+.task-meta.overdue {
+    color: #d65353;
+}
+
+.task-meta.today {
+    color: #4c67dc;
+}
+
+.task-item.completed .task-meta {
+    color: #299a6d;
+}
+
+/* Task Actions */
+
+.task-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.action-btn {
+    border: none;
+    padding: 8px 11px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.edit-btn {
+    background: #edf1ff;
+    color: #4c67dc;
+}
+
+.edit-btn:hover {
+    background: #dfe6ff;
+}
+
+.delete-btn {
+    background: #fff0f0;
+    color: #dd5555;
+}
+
+.delete-btn:hover {
+    background: #ffe0e0;
+}
+
+/* Empty State */
+
+.empty-state {
+    text-align: center;
+    padding: 40px 15px;
+    color: #8791a7;
+}
+
+.empty-state h3 {
+    color: #354057;
+    margin-bottom: 8px;
+}
+
+.empty-state p {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* Edit Dialog */
+
+.edit-dialog {
+    border: none;
+    border-radius: 17px;
+    width: min(90%, 430px);
+    padding: 28px;
+    margin: auto;
+    box-shadow: 0 20px 70px rgba(20, 30, 60, 0.2);
+}
+
+.edit-dialog::backdrop {
+    background: rgba(20, 30, 50, 0.55);
+}
+
+.edit-dialog h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.edit-dialog label {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    color: #59647d;
+    margin: 15px 0 8px;
+}
+
+.dialog-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.cancel-btn {
+    background: #edf0f6;
+    color: #4d5870;
+    border: none;
+    border-radius: 9px;
+    padding: 11px 16px;
+}
+
+.save-btn {
+    padding: 11px 16px;
+}
+
+/* Toast Notification */
+
+.toast {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #202b48;
+    color: white;
+    padding: 13px 20px;
+    border-radius: 10px;
+    font-size: 13px;
+    opacity: 0;
+    transform: translateY(15px);
+    pointer-events: none;
+    transition: 0.25s;
+    z-index: 10;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Footer */
+
+footer {
+    text-align: center;
+    padding: 25px 0;
+    color: #8a93a8;
+    font-size: 12px;
+}
+
+/* Responsive Design */
+
+@media (max-width: 700px) {
+
+    .hero {
+        padding: 30px 22px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hero-card {
+        width: 100%;
+    }
+
+    .task-form {
+        grid-template-columns: 1fr;
+    }
+
+    .add-btn {
+        padding: 14px;
+    }
+}
+
+@media (max-width: 650px) {
+
+    .app-container {
+        width: min(100% - 24px, 1000px);
+    }
+
+    .header {
+        padding: 18px 0;
+    }
+
+    .tasks-section {
+        padding: 20px 15px;
+    }
+
+    .stats-container {
+        gap: 8px;
+    }
+
+    .stat-card {
+        padding: 12px 9px;
+    }
+
+    .stat-card span {
+        font-size: 10px;
+    }
+
+    .stat-card h3 {
+        font-size: 21px;
+    }
+
+    .task-item {
+        grid-template-columns: 22px 1fr;
+        gap: 10px;
+    }
+
+    .task-actions {
+        grid-column: 2;
+    }
+
+    .action-btn {
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 380px) {
+
+    .header-date {
+        font-size: 11px;
+    }
+
+    .brand h2 {
+        font-size: 20px;
+    }
+
+    .filter-buttons {
+        gap: 5px;
+    }
+
+    .filter-btn {
+        padding: 9px 12px;
+        font-size: 12px;
+    }
+}

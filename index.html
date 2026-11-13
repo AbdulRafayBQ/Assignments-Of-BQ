@@ -1,16 +1,196 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript Advanced Assignment</title>
+
+    <title>Daylist - To-Do List Application</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
 </head>
 <body>
 
-    <h1>JavaScript Advanced Assignment</h1>
-    <p>All 10 JavaScript questions are completed.</p>
-    <p>Open Inspect → Console to view the output.</p>
+    <div class="app-container">
 
-    <script src="app.js"></script>
+        <header class="header">
+            <div class="brand">
+                <div class="brand-icon">D</div>
+                <h2>Daylist</h2>
+            </div>
+
+            <div class="header-date">
+                <span class="date-label">TODAY</span>
+                <span id="currentDate"></span>
+            </div>
+        </header>
+
+        <main>
+
+            <section class="hero">
+
+                <div class="hero-content">
+                    <p class="eyebrow">YOUR PERSONAL WORKSPACE</p>
+
+                    <h1>
+                        Make room for
+                        <span>what matters.</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        Organize your day, manage your tasks,
+                        and make every little step count.
+                    </p>
+                </div>
+
+                <div class="hero-card">
+                    <p class="card-label">TODAY'S DATE</p>
+                    <h2 id="heroDate"></h2>
+                    <p>Stay organized. Stay focused.</p>
+                </div>
+
+            </section>
+
+            <section class="tasks-section">
+
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">YOUR WORKSPACE</p>
+                        <h2>My Tasks</h2>
+                    </div>
+
+                    <span id="taskCountLabel">0 tasks</span>
+                </div>
+
+                <!-- Add Task Form -->
+
+                <form id="taskForm" class="task-form">
+
+                    <input
+                        type="text"
+                        id="taskInput"
+                        placeholder="What needs to be done?"
+                        maxlength="150"
+                        required
+                    >
+
+                    <input
+                        type="date"
+                        id="taskDate"
+                        aria-label="Select task due date"
+                    >
+
+                    <button type="submit" class="add-btn">
+                        + Add Task
+                    </button>
+
+                </form>
+
+                <!-- Filter Buttons -->
+
+                <div class="toolbar">
+
+                    <div class="filter-buttons">
+
+                        <button class="filter-btn active"
+                            data-filter="all">
+                            All
+                        </button>
+
+                        <button class="filter-btn"
+                            data-filter="pending">
+                            Pending
+                        </button>
+
+                        <button class="filter-btn"
+                            data-filter="completed">
+                            Completed
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- Task Statistics -->
+
+                <div class="stats-container">
+
+                    <div class="stat-card">
+                        <span>Total Tasks</span>
+                        <h3 id="totalCount">0</h3>
+                    </div>
+
+                    <div class="stat-card">
+                        <span>Completed</span>
+                        <h3 id="completedCount">0</h3>
+                    </div>
+
+                    <div class="stat-card">
+                        <span>Pending</span>
+                        <h3 id="pendingCount">0</h3>
+                    </div>
+
+                </div>
+
+                <!-- Tasks Display -->
+
+                <div id="taskList" class="task-list"
+                    aria-live="polite">
+                </div>
+
+            </section>
+
+        </main>
+
+        <footer>
+            <p>Stay organized. Keep moving forward.</p>
+        </footer>
+
+    </div>
+
+    <!-- Edit Task Dialog -->
+
+    <dialog id="editDialog" class="edit-dialog">
+
+        <form id="editForm">
+
+            <h2>Edit Task</h2>
+
+            <label for="editInput">Task Name</label>
+
+            <input
+                type="text"
+                id="editInput"
+                maxlength="150"
+                required
+            >
+
+            <label for="editDate">Due Date</label>
+
+            <input
+                type="date"
+                id="editDate"
+            >
+
+            <div class="dialog-buttons">
+
+                <button type="button" id="cancelEdit"
+                    class="cancel-btn">
+                    Cancel
+                </button>
+
+                <button type="submit" class="save-btn">
+                    Save Changes
+                </button>
+
+            </div>
+
+        </form>
+
+    </dialog>
+
+    <div id="toast" class="toast" role="status"></div>
+
 </body>
 </html>
